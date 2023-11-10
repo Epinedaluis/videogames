@@ -76,9 +76,30 @@ const deleteGame = async (req = request, res = response) => {
   }
 };
 
+
+const getGameById = async (req = request, res = response) => {
+  const { id } = req.params;
+
+  try {
+    const game = await pool.query(models.getGameById, [id]);
+
+    if (game.length === 0) {
+      res.status(404).json({ msg: `Game with ID ${id} not found` });
+    } else {
+      res.json(game[0]);
+    }
+  } catch (error) {
+    console.error("Error retrieving game:", error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+};
+
+
 module.exports = {
   listGames,
   createGame,
   deleteGame,
   updateGame,
+  getGameById
+  
 };

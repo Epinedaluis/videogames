@@ -30,12 +30,14 @@ const gamesmodel = {
   ,
 
   // Consulta para eliminar un juego por ID (marcar como inactivo)
-  deleteGameById: 
-  `DELETE 
-  FROM
-   games
+  getGameById: `
+    SELECT
+      *
+    FROM
+      games
     WHERE
-     id = ?`
+      id = ?
+  `,
 
 
 };
